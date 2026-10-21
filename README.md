@@ -165,15 +165,23 @@ In the command below, replace:
 ```bash
 # Run OrthoLoger with the test script
 pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
+#if the same directory names have been used, all that would need to changed within the path above is the username
 ```
+
 
 OrthoLoger writes the test output to the test installation directory:
 
-**`/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/`**
+```bash
+/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/
+#in the path above insert your own username and directory names to get to the test installation directory
+```
 
 The run log is stored in:
 
-**`/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/`**
+```bash
+/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/
+#replace with your username and directory names(if different than the ones above)
+```
 
 To copy the generated test data into the project directory:
 
@@ -186,7 +194,9 @@ mkdir orthologer_test_data
 
 # Copy the OrthoLoger results into the orthologer test data directory
 cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
+#replace with your username and directory names(if different than the ones above)
 ```
+
 
 ## proteinortho
 https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads
@@ -235,7 +245,7 @@ The dataset we are using:
 
 **QfO release 2020_04:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2020_04/`
 
-Reference proteomes provide protein sequences for different species and can be used as input for orthology inference tools.
+Reference proteomes provide protein sequences for different species and can be used as input for orthology inference tools. This dataset was chosen because it is compatible with the most tools, allowing for a more seamless process. 
 
 ## Dataset Categories
 
