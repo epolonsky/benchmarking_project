@@ -8,10 +8,10 @@ The four tools benchmarked are:
 
 | Tool | Version | Execution Method | Source |
 |------|---------|------------------|--------|
-| SonicParanoid2 | 2.0.9 | Pixi environment (pixi) | https://gitlab.com/salvo981/sonicparanoid2 |
-| Proteinortho   | 6.3.6  | Conda environment (proteinortho_env) | https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads   |
-| OrthoFinder    | 2.5.5 | Conda environment (of3_env) | https://orthofinder.github.io/OrthoFinder/ |
-| OrthoLoger     | 3.9.1 | Pixi environment (pixi) | https://orthologer.ezlab.org/ |
+| SonicParanoid2 | 2.0.9 | Pixi environment (pixi) | [SonicParanoid2 GitLab](https://gitlab.com/salvo981/sonicparanoid2) |
+| Proteinortho   | 6.3.6  | Conda environment (proteinortho_env) | [Proteinortho GitLab](https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads)   |
+| OrthoFinder    | 2.5.5 | Conda environment (of3_env) | [OrthoFinder GitHub](https://orthofinder.github.io/OrthoFinder/) |
+| OrthoLoger     | 3.9.1 | Pixi environment (pixi) | [OrthoLoger WebPage](https://orthologer.ezlab.org/) |
 
 
 The tools will be evaluated using protein reference datasets from closely related and distantly related species. We will also investigate whether dataset size affects tool performance.
@@ -134,45 +134,33 @@ pixi add requests
 
 run on test data:
 
-change the paths below to match the location of your OrthoLoger installation and project directory
-
-In the command below, replace:
-
-- **`/home/epolonsky/benchmarking_project`** with the path to your own project directory
-- **`.pixi/envs/default/ORTHOLOGER-3.9.1`** with the location of your OrthoLoger installation, if different
-
 ```bash
 # Run OrthoLoger with the test script
-pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
-#if the same directory names have been used, all that would need to changed within the path above is the username
+pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
 ```
 
 OrthoLoger writes the test output to the test installation directory:
 
 ```bash
-/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/
-#in the path above insert your own username and directory names to get to the test installation directory
+path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/
 ```
 
 The run log is stored in:
 
 ```bash
-/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/
-#replace with your username and directory names(if different than the ones above)
+path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/
 ```
 
-To copy the generated test data into the project directory:
+To copy the generated test data into your own project directory:
+
+Run the following commands from the root directory of the cloned benchmarking project:
 
 ```bash
-# Go into the benchmarking project directory
-cd path/to/benchmarking_project
-
-# make the orthologer test data directory
+# make the OrthoLoger test data directory
 mkdir orthologer_test_data
 
-# Copy the OrthoLoger results into the orthologer test data directory
-cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
-#replace with your username and directory names(if different than the ones above)
+# Copy the OrthoLoger results into the OrthoLoger test data directory
+cp -r path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
 ```
 
 ## proteinortho
