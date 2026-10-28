@@ -227,12 +227,12 @@ perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.f
 mkdir proteinortho_test_data
 
 # Move the output files into the proteinortho test data directory
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.blast-graph
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.info
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph.summary
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.html
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.tsv
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.blast-graph ~/benchmarking_project/proteinortho_test_data
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.info ~/benchmarking_project/proteinortho_test_data
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph ~/benchmarking_project/proteinortho_test_data
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph.summary ~/benchmarking_project/proteinortho_test_data
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.html ~/benchmarking_project/proteinortho_test_data
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.tsv ~/benchmarking_project/proteinortho_test_data
 ```
 
 # Data Selection
