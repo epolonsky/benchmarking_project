@@ -178,36 +178,21 @@ cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/t
 ## proteinortho
 proteinortho was installed through a Conda environment.
 
-```bash
-# Go into the benchmarking project directory
-cd path/to/benchmarking_project
+Run the following commands from the root directory of the cloned benchmarking project:
 
-# Make environment and install proteinortho with conda
+```bash
+# Make environment and install proteinortho with Conda
 conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
 ```
 
 run on test data:
 
 ```bash
-# Go into the benchmarking project directory
-cd path/to/benchmarking_project
-
-# activate the proteinortho conda environment
+# activate the proteinortho Conda environment
 conda activate proteinortho_env
 
 # run the perl script on the test data
 perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
-
-# Make the proteinortho test data directory
-mkdir proteinortho_test_data
-
-# Move the output files into the proteinortho test data directory
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.blast-graph ~/benchmarking_project/proteinortho_test_data
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.info ~/benchmarking_project/proteinortho_test_data
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph ~/benchmarking_project/proteinortho_test_data
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph.summary ~/benchmarking_project/proteinortho_test_data
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.html ~/benchmarking_project/proteinortho_test_data
-mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.tsv ~/benchmarking_project/proteinortho_test_data
 ```
 
 # Data Selection
