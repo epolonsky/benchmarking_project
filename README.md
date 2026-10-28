@@ -38,22 +38,20 @@ Pixi was used to install Sonicparanoid2 and OrthoLoger
 
 The Pixi version used was 0.81.0
 
-```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
+Run the following commands from the directory where you want to install Pixi and set up the project.
 
+```bash
 # Install Pixi
 wget -qO- https://pixi.sh/install.sh | sh
 
-# Reload Bash configuration
-source ~/.bashrc
-
 # Verify Pixi installation
 pixi --version
+```
+Navigate to the root directory of the cloned benchmarking project before running the following commands.
 
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
+If the repository does not already contain a Pixi configuration:
 
+```bash
 # Initialize Pixi project
 pixi init
 
@@ -62,17 +60,13 @@ pixi workspace channel add conda-forge
 pixi workspace channel add bioconda
 ```
 
-
 ## Sonicparanoid2
-https://gitlab.com/salvo981/sonicparanoid2
-https://bioconda.github.io/recipes/sonicparanoid/README.html
 
-Sonicparanoid2 was installed using pixi
+Sonicparanoid2 was installed using pixi.
+
+Run the following commands from the root directory of the cloned benchmarking project:
 
 ```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
-
 # Add Python 3.10 to the Pixi project
 pixi add python=3.10
 
@@ -80,55 +74,45 @@ pixi add python=3.10
 pixi add --pypi sonicparanoid
 ```
 
-we did not use the mmsqs2 function of this tool as it was incompatible with the CPU on the server it required AVX2 and we only had AVX1. This was done using the --graph-only flag.
+We used the --graph-only flag because the mmseqs2 functionality required AVX2 support, while the server only supported AVX1. Therefore, we did not use the mmseqs2 functionality.
+
 run on test data:
 
 ```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
-
 # Retrieve the test data from SonicParanoid
 pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
 
-# Go into the SonicParanoid test data directory
-cd sonicparanoid_test_data/sonicparanoid_test/
-
 # Run SonicParanoid on the test data
-pixi run sonicparanoid -i ./test_input -o ./test_output --project-id my_first_run -t 4 --graph-only
+pixi run sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run -t 4 --graph-only
 ```
 
 problem we were having before (in case we want to try to fix it again)
 https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54
 
 ## OrthoFinder
-https://orthofinder.github.io/OrthoFinder/
 
-OrthoFinder was installed through a conda environment
+OrthoFinder was installed through a conda environment.
+
+Run the following commands from the root directory of the cloned benchmarking project:
 
 ```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
-
-# Create conda environment 
+# Create Conda environment 
 conda create -n of3_env python=3.12
 
-# Activate the conda environment
+# Activate the Conda environment
 conda activate of3_env
 
-# Install OrthoFinder through conda
+# Install OrthoFinder
 conda install -c conda-forge -c bioconda orthofinder
 
-# Install numpy through conda
+# Install the required NumPy version
 conda install numpy=1.26.4
 ```
 
 run on test data:
 
 ```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
-
-# Activate the conda environment for OrthoFinder
+# Activate the Conda environment for OrthoFinder
 conda activate of3_env
 
 # Run OrthoFinder on the test data
@@ -136,16 +120,11 @@ orthofinder -f orthofinder_test_data/
 ```
 
 ## OrthoLoger
-https://orthologer.ezlab.org/
+OrthoLoger was installed using pixi.
 
-https://bioconda.github.io/recipes/orthologer/README.html
- 
-OrthoLoger was installed using pixi
+Run the following commands from the root directory of the cloned benchmarking project:
  
 ```bash
-# Go into the benchmarking project directory
-cd ~/benchmarking_project
-
 # Add the right dependencies and install OrthoLoger
 pixi add python=3.12 "numpy<2" "scipy<1.13" "orthologer=3.9.1"
 
@@ -168,7 +147,6 @@ pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; /home/epolonsky/benchma
 #if the same directory names have been used, all that would need to changed within the path above is the username
 ```
 
-
 OrthoLoger writes the test output to the test installation directory:
 
 ```bash
@@ -187,7 +165,7 @@ To copy the generated test data into the project directory:
 
 ```bash
 # Go into the benchmarking project directory
-cd ~/benchmarking_project
+cd path/to/benchmarking_project
 
 # make the orthologer test data directory
 mkdir orthologer_test_data
@@ -197,15 +175,12 @@ cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/t
 #replace with your username and directory names(if different than the ones above)
 ```
 
-
 ## proteinortho
-https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads
-
-proteinortho was installed through a conda environment
+proteinortho was installed through a Conda environment.
 
 ```bash
 # Go into the benchmarking project directory
-cd ~/benchmarking_project
+cd path/to/benchmarking_project
 
 # Make environment and install proteinortho with conda
 conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
@@ -215,7 +190,7 @@ run on test data:
 
 ```bash
 # Go into the benchmarking project directory
-cd ~/benchmarking_project
+cd path/to/benchmarking_project
 
 # activate the proteinortho conda environment
 conda activate proteinortho_env
