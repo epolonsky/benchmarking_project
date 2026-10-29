@@ -44,6 +44,7 @@ Before running the benchmark, complete the following steps:
 Clone the repository and enter the project directory:
 
 git clone <https://github.com/epolonsky/benchmarking_project>
+
 cd benchmarking_project
 
 
