@@ -59,31 +59,19 @@ Verify the Pixi installation:
 ```bash
 pixi --version
 ```
-Navigate to the root directory of the cloned benchmarking project before running the following commands.
-
-If the repository does not already contain a Pixi configuration, initialize the project and add the required package channels:
-
-```bash
-# Initialize Pixi project
-pixi init
-
-# Add package channels to the Pixi project
-pixi workspace channel add conda-forge
-pixi workspace channel add bioconda
-```
-
-If the repository already contains the file `pixi.toml`, use its existing configuration rather than initializing the project again.
 
 ## Sonicparanoid2
 
 Sonicparanoid2 was installed using pixi.
 
 ```bash
-# Add Python 3.10 to the Pixi project if the project does not already contain the required dependencies
-pixi add python=3.10
+pixi install -e sonicparanoid
+```
 
-# Install SonicParanoid
-pixi add --pypi sonicparanoid
+Verify the installation:
+
+```bash
+pixi run -e sonicparanoid sonicparanoid --help 
 ```
 
 We used the --graph-only flag because the mmseqs2 functionality required AVX2 support, while the server only supported AVX1. Therefore, we did not use the mmseqs2 functionality.
@@ -92,10 +80,10 @@ Run on test data:
 
 ```bash
 # Retrieve the test data from SonicParanoid
-pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
+pixi run -e sonicparanoid sonicparanoid-get-test-data -o sonicparanoid_test_data
 
 # Run SonicParanoid on the test data
-pixi run sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run --graph-only
+pixi run -e sonicparanoid sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run --graph-only
 ```
 
 Expected output:
@@ -141,18 +129,20 @@ OrthoFinder creates a results directory within the input directory.
 OrthoLoger was installed using pixi.
  
 ```bash
-# Add the right dependencies and install OrthoLoger
-pixi add python=3.12 "numpy<2" "scipy<1.13" "orthologer=3.9.1"
+pixi install -e orthologer
+```
 
-# Install the requests Python library 
-pixi add requests
+Verify the installation:
+
+```bash
+pixi run -e orthologer orthologer -v
 ```
 
 run on test data:
 
 ```bash
 # Run OrthoLoger with the test script
-pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; $CONDA_PREFIX/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
+pixi run -e orthologer bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; "$CONDA_PREFIX/ORTHOLOGER-3.9.1/test/run_test.sh" prot/main'
 ```
 
 Expected output:
@@ -184,7 +174,7 @@ cp -r $CONDA_PREFIX/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
 From the project root, you can check the location of the OrthoLoger test script with:
 
 ```bash
-pixi run bash -c 'echo "$CONDA_PREFIX"; find "$CONDA_PREFIX" -type f -name run_test.sh'
+pixi run -e orthologer bash -c 'echo "$CONDA_PREFIX"; find "$CONDA_PREFIX" -type f -name run_test.sh'
 ```
 
 ## Proteinortho
