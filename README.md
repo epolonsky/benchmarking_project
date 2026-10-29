@@ -98,20 +98,12 @@ problem we were having before:
 OrthoFinder was installed through a Conda environment.
 
 ```bash
-# Create Conda environment 
-conda create -n of3_env python=3.12
-
-# Activate the Conda environment
-conda activate of3_env
-
-# Install OrthoFinder
-conda install -c conda-forge -c bioconda orthofinder
-
-# Install the required NumPy version
-conda install numpy=1.26.4
+conda env create -f orthofinder.yaml
 ```
 
 Run on test data:
+
+Test data for OrthoFinder was obtain from the OrthoFinder GitHub page.
 
 ```bash
 # Activate the Conda environment for OrthoFinder
@@ -181,11 +173,12 @@ pixi run -e orthologer bash -c 'echo "$CONDA_PREFIX"; find "$CONDA_PREFIX" -type
 Proteinortho was installed through a Conda environment.
 
 ```bash
-# Make environment and install proteinortho with Conda
-conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
+conda env create -f proteinortho.yaml
 ```
 
 run on test data:
+
+Test data for Proteinortho was obtain from the Proteinortho GitLab page.
 
 ```bash
 # activate the proteinortho Conda environment
