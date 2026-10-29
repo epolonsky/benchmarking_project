@@ -5,14 +5,17 @@ This document contains the commands and code used to run and benchmark the four 
 
 The commands are organized by tool and task to make the benchmarking process reproducible. 
 
+Before running the following commands make sure you are in the cloned benchmarking project directory:
+
+```bash
+cd benchmarking_project
+```
+
 ## Dataset Download
 
 The main benchmarking dataset was downloaded using `wget`
 
 ```bash
-cd benchmarking_project
-#change to the directory that contains the tools to be benchmarked
-
 mkdir datasets
 #make a new directory within the benchmarking_project directory for the datasets
 
@@ -24,8 +27,6 @@ nohup wget -P datasets https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/p
 Extract contents of QfO_release_2020_04.tar.gz
 
 ```bash
-cd benchmarking_project/datasets
-
 mkdir QfO_release_2020_04
 
 cd QfO_release_2020_04
@@ -36,8 +37,6 @@ tar -xzf ~/benchmarking_project/datasets/QfO_release_2020_04.tar.gz -C .
 combine all the protein fasta files for the main benchmarking input
 
 ```bash
-cd benchmarking_project/datasets
-
 mkdir QfO_release_2020_04_combined_all
 
 cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
@@ -49,8 +48,6 @@ rm QfO_release_2020_04_combined_all/*_additional.fasta # remove protein isoform 
 extract species for the subdatasets
 
 ```bash
-cd benchmarking_project/datasets
-
 mkdir distant_species
 #makes a new directory within the datasets directory for distant species
 mkdir close_species
@@ -66,7 +63,6 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 ## SonicParanoid2
 
 ```bash
-cd benchmarking_project
 mkdir datasets/sonicparanoid_fasta_only
 cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
 
@@ -76,7 +72,6 @@ nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run sonic
 ## Proteinortho
 
 ```bash
-cd benchmarking_project
 mkdir proteinortho_results
 conda activate proteinortho_env
 
@@ -93,7 +88,6 @@ mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 
 ```bash
 conda activate of3_env
-cd benchmarking_project
 
 nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f datasets/QfO_release_2020_04_combined_all -o orthofinder_results &
 ```
@@ -101,7 +95,6 @@ nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f d
 ## OrthoLoger
 
 ```bash
-cd benchmarking_project
 mkdir orthologer_results
 
 pixi run bash -c '
