@@ -32,24 +32,35 @@ Computational tools identify orthologs using different combinations of sequence 
 
 # Tool Installation
 
+## Perequisites
+
+Before running the benchmark, complete the following steps:
+
+- Clone the project repository.
+- Install Pixi, for the SonicParanoid2 and OrthoLoger environments.
+- Install Conda, for the Proteinortho and OrthoFinder environments.
+- The software dependencies required by each tool.
+
+Clone the repository and enter the project directory:
+
+git clone <https://github.com/epolonsky/benchmarking_project>
+cd benchmarking_project
+
+
 ## Pixi
 
-Pixi was used to install Sonicparanoid2 and OrthoLoger
+Pixi version 0.81.0 was used to install Sonicparanoid2 and OrthoLoger.
 
-The Pixi version used was 0.81.0
+Install Pixi using the [official installation instructions](https://pixi.prefix.dev/latest/installation/).
 
-Run the following commands from the directory where you want to install Pixi and set up the project.
+Verify the Pixi installation:
 
 ```bash
-# Install Pixi
-wget -qO- https://pixi.sh/install.sh | sh
-
-# Verify Pixi installation
 pixi --version
 ```
 Navigate to the root directory of the cloned benchmarking project before running the following commands.
 
-If the repository does not already contain a Pixi configuration:
+If the repository does not already contain a Pixi configuration, initialize the project and add the required package channels:
 
 ```bash
 # Initialize Pixi project
@@ -60,14 +71,14 @@ pixi workspace channel add conda-forge
 pixi workspace channel add bioconda
 ```
 
+If the repository already contains the file `pixi.toml`, use its existing configuration rather than initializing the project again.
+
 ## Sonicparanoid2
 
 Sonicparanoid2 was installed using pixi.
 
-Run the following commands from the root directory of the cloned benchmarking project:
-
 ```bash
-# Add Python 3.10 to the Pixi project
+# Add Python 3.10 to the Pixi project if the project does not already contain the required dependencies
 pixi add python=3.10
 
 # Install SonicParanoid
@@ -76,24 +87,26 @@ pixi add --pypi sonicparanoid
 
 We used the --graph-only flag because the mmseqs2 functionality required AVX2 support, while the server only supported AVX1. Therefore, we did not use the mmseqs2 functionality.
 
-run on test data:
+Run on test data:
 
 ```bash
 # Retrieve the test data from SonicParanoid
 pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
 
 # Run SonicParanoid on the test data
-pixi run sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run -t 4 --graph-only
+pixi run sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run --graph-only
 ```
 
-problem we were having before (in case we want to try to fix it again)
-https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54
+Expected output:
+
+The command writes its results to the specified output directory: `sonicparanoid_test_data/sonicparanoid_test/test_output/`
+
+problem we were having before:
+[Forum About Error](https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54)
 
 ## OrthoFinder
 
-OrthoFinder was installed through a conda environment.
-
-Run the following commands from the root directory of the cloned benchmarking project:
+OrthoFinder was installed through a Conda environment.
 
 ```bash
 # Create Conda environment 
@@ -109,7 +122,7 @@ conda install -c conda-forge -c bioconda orthofinder
 conda install numpy=1.26.4
 ```
 
-run on test data:
+Run on test data:
 
 ```bash
 # Activate the Conda environment for OrthoFinder
@@ -119,10 +132,12 @@ conda activate of3_env
 orthofinder -f orthofinder_test_data/
 ```
 
+Expected output:
+
+OrthoFinder creates a results directory within the input directory.
+
 ## OrthoLoger
 OrthoLoger was installed using pixi.
-
-Run the following commands from the root directory of the cloned benchmarking project:
  
 ```bash
 # Add the right dependencies and install OrthoLoger
@@ -136,19 +151,21 @@ run on test data:
 
 ```bash
 # Run OrthoLoger with the test script
-pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
+pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; $CONDA_PREFIX/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
 ```
+
+Expected output:
 
 OrthoLoger writes the test output to the test installation directory:
 
 ```bash
-path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/
+$CONDA_PREFIX/ORTHOLOGER-3.9.1/test/tests/prot/
 ```
 
 The run log is stored in:
 
 ```bash
-path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/
+$CONDA_PREFIX/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/
 ```
 
 To copy the generated test data into your own project directory:
@@ -160,13 +177,17 @@ Run the following commands from the root directory of the cloned benchmarking pr
 mkdir orthologer_test_data
 
 # Copy the OrthoLoger results into the OrthoLoger test data directory
-cp -r path/to/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
+cp -r $CONDA_PREFIX/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
 ```
 
-## proteinortho
-proteinortho was installed through a Conda environment.
+From the project root, you can check the location of the OrthoLoger test script with:
 
-Run the following commands from the root directory of the cloned benchmarking project:
+```bash
+pixi run bash -c 'echo "$CONDA_PREFIX"; find "$CONDA_PREFIX" -type f -name run_test.sh'
+```
+
+## Proteinortho
+Proteinortho was installed through a Conda environment.
 
 ```bash
 # Make environment and install proteinortho with Conda
@@ -183,15 +204,21 @@ conda activate proteinortho_env
 perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
 ```
 
+The Proteinortho command assumes that proteinortho6.pl is available from the current directory, otherwise it can be downloaded into the directory from the Proteinortho GitLab page.
+
+Expected output:
+
+Proteinortho writes output files to the directory where the command was run. The -project option identifies the project name used for the run and the prefix names for the output files.
+
 # Data Selection
 
 The data for this project is selected from the European Bioinformatics Institute (EBI) Quest for Orthologs (QfO) reference proteome collection. The collection of datasets can be found using the link below.
 
-**QfO reference proteome releases:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/`
+[QfO previous reference proteome releases](https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/)
 
 The dataset we are using: 
 
-**QfO release 2020_04:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2020_04/`
+[QfO release 2020_04](https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2020_04/)
 
 Reference proteomes provide protein sequences for different species and can be used as input for orthology inference tools. This dataset was chosen because it is compatible with the most tools, allowing for a more seamless process. 
 
@@ -202,8 +229,8 @@ The types of datasets used in this project:
 | Dataset | Species | Purpose |
 |---------|---------|---------|
 | Full | All 78 QfO species | Main benchmark |
-| Close | list species used | Closely related species |
-| Distant | list species used | More distantly related species |
+| Close | 6 related species | Closely related species |
+| Distant | 6 distant species | More distantly related species |
 
 Species were selected based on their evolutionary relationships and the availability of suitable proteomes and reference orthology data.
 
