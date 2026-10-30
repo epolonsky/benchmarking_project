@@ -66,7 +66,7 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 mkdir datasets/sonicparanoid_fasta_only
 cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
 
-nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
+nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run -e sonicparanoid  sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
 ```
 
 ## Proteinortho
@@ -97,7 +97,7 @@ nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f d
 ```bash
 mkdir orthologer_results
 
-pixi run bash -c '
+pixi run -e orthologer bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
 export ODBAPI_URL_VERSION="v12-2"
 cd /home/epolonsky/benchmarking_project/orthologer_results
@@ -107,13 +107,13 @@ orthologer -c create
 cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 cd orthologer_results
 
-pixi run bash -c '
+pixi run -e orthologer bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
 export ODBAPI_URL_VERSION="v12-2"
 orthologer -c import -d /home/epolonsky/benchmarking_project/datasets/QfO_release_2020_04_combined_all -p orthologer_main_benchmark
 '
 
-nohup /usr/bin/time --verbose -o orthologer_resource_usage.txt pixi run bash -c '
+nohup /usr/bin/time --verbose -o orthologer_resource_usage.txt pixi run -e orthologer bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
 export ODBAPI_URL_VERSION="v12-2"
 orthologer -c run -p orthologer_main_benchmark
