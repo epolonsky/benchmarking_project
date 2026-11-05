@@ -88,7 +88,7 @@ pixi run -e sonicparanoid sonicparanoid-get-test-data -o sonicparanoid_test_data
 pixi run -e sonicparanoid sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run --graph-only
 ```
 
-Expected output:
+### Expected output:
 
 The command writes its results to the specified output directory: `sonicparanoid_test_data/sonicparanoid_test/test_output/`
 
@@ -115,9 +115,32 @@ conda activate of3_env
 orthofinder -f orthofinder_test_data/
 ```
 
-Expected output:
+### Expected output:
 
-OrthoFinder creates a results directory within the input directory.
+OrthoFinder ouputs its results into a dirctory called `Resuts_Date`, with the "Date"  being the date the analysis was run. This results directory contain 13 subdirectories that organize the output files according to their purpose. 
+
+These include:
+
+- **Comparative_Genomics_Statistics:** Contains statistical summaries of orthogroups, ortholog relationships, gene duplications, and species overlaps.
+- **Gene_Duplication_Events:** Contains information about inferred gene duplication events.
+- **Gene_Trees:** Contains inferred gene trees for orthogroups.
+- **Orthogroup_Sequences:** Contains FASTA files with the protein sequences assigned to each orthogroup.
+- **Orthologues:** Contains files describing orthologous relationships between genes from different species.
+- **Phylogenetic_Hierarchical_Orthogroups:** Contains hierarchical orthogroups (HOGs) inferred at different levels of the species tree.
+- **Phylogenetically_Misplaced_Genes:** Contains genes identified as potentially misplaced within their gene trees.
+- **Putarive_Xenologs:** Contains genes identified as potential xenologs, which may have originated through horizontal gene transfer.
+- **Resolved_Gene_Trees:** Contains rooted and resolved gene trees for orthogroups.
+- **Single_Copy_Orthologue_Sequences:** Contains FASTA files of sequences belonging to single-copy orthogroups.
+- **Species_Tree:** Contains the inferred species phylogenetic tree and related files.
+- **Working Directory:** Contains intermediate files generated during the OrthoFinder analysis.
+
+The results directory contains two additional files:
+
+- **Citation.txt:** Provides the citation information for OrthoFinder.
+- **Log.txt:** Contains information about the analysis execution, including processing steps and progress messages.
+
+For more detailed descriptions of the individual output files, refer to the [Official OrthoFinder Guide to Results](https://orthofinder.github.io/OrthoFinder/tutorials/guide-to-results/). 
+
 
 ## OrthoLoger
 OrthoLoger was installed using pixi.
@@ -141,7 +164,7 @@ The test data for OrthoLoger is obtained through running the `run_test.sh` scrip
 pixi run -e orthologer bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; "$CONDA_PREFIX/ORTHOLOGER-3.9.1/test/run_test.sh" prot/main'
 ```
 
-Expected output:
+### Expected output:
 
 OrthoLoger writes the test output to the test installation directory:
 
@@ -194,7 +217,7 @@ perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.f
 
 The Proteinortho command assumes that proteinortho6.pl is available from the current directory, otherwise it can be downloaded into the directory from the Proteinortho GitLab page.
 
-Expected output:
+### Expected output:
 
 Proteinortho writes output files to the directory where the command was run. The -project option identifies the project name used for the run and the prefix names for the output files.
 
