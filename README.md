@@ -78,6 +78,8 @@ We used the --graph-only flag because the mmseqs2 functionality required AVX2 su
 
 Run on test data:
 
+The test data was obtained from SonicParanoid using the `sonicparanoid-get-test-data` command.
+
 ```bash
 # Retrieve the test data from SonicParanoid
 pixi run -e sonicparanoid sonicparanoid-get-test-data -o sonicparanoid_test_data
@@ -131,6 +133,8 @@ pixi run -e orthologer orthologer -v
 ```
 
 run on test data:
+
+The test data for OrthoLoger is obtained through running the `run_test.sh` script within OrhtoLoger's installation.
 
 ```bash
 # Run OrthoLoger with the test script
