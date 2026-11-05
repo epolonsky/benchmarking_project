@@ -117,7 +117,7 @@ orthofinder -f orthofinder_test_data/
 
 ### Expected output:
 
-OrthoFinder ouputs its results into a dirctory called `Resuts_Date`, with the "Date"  being the date the analysis was run. This results directory contain 13 subdirectories that organize the output files according to their purpose. 
+OrthoFinder ouputs its results into a dirctory called `Resuts_Date`, with the "Date"  being the date the analysis was run. This results directory contains 13 subdirectories that organize the output files according to their purpose. 
 
 These include:
 
