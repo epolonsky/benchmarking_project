@@ -90,7 +90,17 @@ pixi run -e sonicparanoid sonicparanoid -i ./sonicparanoid_test_data/sonicparano
 
 ### Expected output:
 
-The command writes its results to the specified output directory: `sonicparanoid_test_data/sonicparanoid_test/test_output/`
+SonicParanoid2 ouputs its results into the output directory specified in the run command. The results directory contains three subdirectories.
+
+These include:
+- **alignments:** Contains intermediate sequence alignment files generated during the protein comparison step.
+- **orthologs_db:** Contains pairwise ortholog tables stored in a database structure. These tables can be reused during subsequent or updated runs.
+- **runs**: Contains results organized by individual analysis runs. Each run has its own directory containing run information, pairwise ortholog relationships, and multi-species ortholog groups.
+
+The results directory contains two additional files:
+
+- **last_run_info.txt:** Records details about the most recent SonicParanoid2 run, including the run ID, input and output directories, number of input proteomes, analysis settings, alignment tool and parameters, memory and thread settings, and software environment information.
+- **snapshot.tsv:** Records information about each input proteome used in the analysis. The file includes a numerical identifier, species name, number of protein sequences, and total number of amino acids. This information helps identify and track the input proteomes used across analyses.
 
 problem we were having before:
 [Forum About Error](https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54)
