@@ -14,7 +14,7 @@ The four tools benchmarked are:
 | OrthoLoger     | 3.9.1 | Pixi environment (pixi) | [OrthoLoger WebPage](https://orthologer.ezlab.org/) |
 
 
-The tools will be evaluated using protein reference datasets from closely related and distantly related species. We will also investigate whether dataset size affects tool performance.
+The tools will be evaluated using  reference datasets from closely related and distantly related species. We will also investigate whether dataset size affects tool performance.
 
 ## Research Questions
 
@@ -265,7 +265,17 @@ The Proteinortho command assumes that proteinortho6.pl is available from the cur
 
 ### Expected output:
 
-Proteinortho writes output files to the directory where the command was run. The -project option identifies the project name used for the run and the prefix names for the output files.
+Proteinortho outputs its results into the directory you run it from. The results contain six files. The -project option identifies the project name used for the run and the prefix names for the output files.
+
+These include:
+
+- **proteinortho_test_data.blast-graph:** Contains pairwise sequence similarity results generated during the all-against-all comparison step, before ortholog clustering.
+- **proteinortho_test_data.info:** Records information about the Proteinortho execution, including the date and time of the run, command used, software version, input FASTA files, and analysis parameters and settings.
+- **proteinortho_test_data.proteinortho-graph:** Contains pairwise ortholog relationships retained after clustering. It represents the connections between genes assigned to orthologous groups.
+- **proteinortho_test_data.proteinortho-graph.summary:** Provides summary statistics for the orthology graph, including the number of groups containing different proportions of the input species and the number of groups associated with each species.
+- **proteinortho_test_data.proteinortho.html:** Provides an HTML version of the orthologous group results that can be viewed in a web browser.
+- **proteinortho_test_data.proteinortho.tsv:** Contains the predicted orthologous groups in tab-separated format, including the number of species and genes in each group and the gene identifiers assigned to each species.
+
 
 # Data Selection
 
