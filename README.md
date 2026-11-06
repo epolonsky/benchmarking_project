@@ -276,6 +276,8 @@ These include:
 - **proteinortho_test_data.proteinortho.html:** Provides an HTML version of the orthologous group results that can be viewed in a web browser.
 - **proteinortho_test_data.proteinortho.tsv:** Contains the predicted orthologous groups in tab-separated format, including the number of species and genes in each group and the gene identifiers assigned to each species.
 
+For more detailed descriptions of the individual output files, refer to `Output Files Overview` section in the [Official Proteinorth Gitlab](https://gitlab.com/paulklemm_PHD/proteinortho). 
+
 
 # Data Selection
 
