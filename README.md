@@ -278,7 +278,7 @@ These include:
 
 For more detailed descriptions of the individual output files, refer to `Output Files Overview` section in the [Official Proteinortho Gitlab](https://gitlab.com/paulklemm_PHD/proteinortho). 
 
-**Note:** Proteinortho may generate additional output files, such as the `.proteinortho.html` and `.proteinortho-graph.summary` files. However, these files are not generated in every run. Automatic HTML generation is limited to runs with fewer than 10 input proteomes and graph summary generation depends on additional conditions, including graph size and the availability of the required summary script. Therefore, these files may be absent when running Proteinortho with larger datasets.
+**Note:** Proteinortho may generate additional output files, such as the `.proteinortho.html` and `.proteinortho-graph.summary` files. However, these files are not generated in every run. Automatic HTML generation is limited to runs with fewer than 10 input proteomes and graph summary generation depends on additional conditions, including graph size (smaller than 50 MB) and the availability of the required summary script. Therefore, these files may be absent when running Proteinortho with larger datasets.
 
 # Data Selection
 
