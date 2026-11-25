@@ -18,11 +18,10 @@ The tools will be evaluated using reference datasets from closely related and di
 
 ## Research Questions
 
-Our project will address three main questions:
+Our project will address two main questions:
 
 1. **Accuracy:** Which tool most accurately identifies orthologous genes?
 2. **Efficiency:** Which tool has the shortest runtime and lowest memory usage?
-3. **Evolutionary distance:** Does evolutionary distance between species affect the accuracy of orthology predictions?
 
 ## Background
 
@@ -323,8 +322,11 @@ The tools are compared using the following measures:
 | Accuracy | Precision, recall, and F1 score |
 | Runtime and Memory | *`/usr/bin/time --verbose`* |
 | Agreement | Overlap and differences between predicted ortholog relationships |
-| Evolutionary distance | Changes in accuracy between closely related and distantly related species |
 
 # Code for project
 
-All the code used for this project is in the `benchmarking_commands.md` file.
+All the code used to run the four tools is in the `benchmarking_commands.md` file.
+
+All the code used to analyze agreement between tools is in the `analysis_commands.md` file. The code for identifying tool specific (unique) predictions and ortholog pairs shared among all four tools is in the tool_comparison.py` file.
+
+All the code used to standardize tool output for the benchmark-webservice pipeline is in the `make_qfo_files.py` file.
